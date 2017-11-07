@@ -1,0 +1,27 @@
+{
+  "name": "mall-fe",
+  "version": "1.0.0",
+  "description": "mall fe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattwhocn/mall-fe.git"
+  },
+  "keywords": [
+    "mall",
+    "fe"
+  ],
+  "author": "matt zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattwhocn/mall-fe/issues"
+  },
+  "homepage": "https://github.com/mattwhocn/mall-fe#readme",
+  "devDependencies": {
+    "webpack": "^1.15.0"
+  },
+  "dependencies": {}
+}

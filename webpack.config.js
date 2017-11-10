@@ -4,11 +4,10 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require("path");
 
 // 环境变量的配置 dev / prod
 var WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev';
-console.log(WEBPACK_ENV)
+console.log(WEBPACK_ENV);
 
 
 // 获取htlmplugin的方法
@@ -32,6 +31,8 @@ var config = {
         publicPath: '/dist',
         filename: 'js/[name].js'
     },
+    // webpack可以不处理应用的某些依赖库，使用externals配置后，依旧可以在代码中通过CMD、AMD或者window/global全局的方式访问
+    //
     externals: {
         'jquery': 'window.jQuery'
     },
@@ -42,10 +43,22 @@ var config = {
                 loader:  ExtractTextPlugin.extract("style-loader","css-loader")
             },
             {
+                test: /\.scss$/,
+                loader:  ExtractTextPlugin.extract("style-loader","css-loader!sass-loader")
+            },
+            {
                 test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/,
                 loader:  "url-loader?limit=100&name=resource/[name].[ext]"
             }
         ]
+    },
+    resolve: {
+        alias: {
+            util: __dirname + '/src/util',
+            page: __dirname + '/src/page',
+            service: __dirname + '/src/service',
+            image: __dirname + '/src/image'
+        }
     },
     plugins: [
         // 独立通用模块 到 js/base.js

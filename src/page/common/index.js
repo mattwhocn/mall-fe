@@ -1,3 +1,4 @@
 'use strict';
 
-console.log('i am global');
+require('./layout.scss');
+require('./footer/index.scss');

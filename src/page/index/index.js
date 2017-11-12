@@ -1,9 +1,4 @@
 'use strict';
 
-var _mm = require('util/mm.js');
-
-var html = '<div>{{data}}</div>';
-var data = {
-    data: 'test'
-};
-console.log(_mm.renderHtml(html, data));
+require('page/common/nav/index.js');
+require('node_modules/_font-awesome@4.7.0@font-awesome/css/font-awesome.min.css');

@@ -74,11 +74,11 @@ var _mm = {
     },
     // 调回主页
     goHome: function () {
-        window.loaction.href = './index.html';
+        window.location.href = './index.html';
     },
     //
-    doLigin: function () {
-        window.loaction.href = './login.html?redirect=' + encodeURIComponent(window.location.href);
+    doLogin: function () {
+        window.location.href = './login.html?redirect=' + encodeURIComponent(window.location.href);
     }
 };
 

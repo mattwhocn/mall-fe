@@ -2,7 +2,7 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 }
 body{
     background: #f6f6f6;
@@ -17,6 +17,9 @@ img{
 }
 label{
     cursor: pointer;
+}
+input{
+    outline:none;
 }
 input[type='checkbox']{
     cursor: pointer;

@@ -19,24 +19,25 @@ var nav = {
         })
         // 注册点击时间
         $('.js-register').click(function() {
-            window.location.href = './register.html'
+            window.location.href = './user-register.html'
         })
         // 退出登录
-        // $('.js-logout').click(function() {
-        //     _user.logout(function(res) {
-        //         window.location.reload();
-        //     }, function(errMsg) {
-        //         _mm.errTips(errMsg)
-        //     })
-        // })
+        $('.js-logout').click(function() {
+            console.log(111)
+            _user.logout(function(res) {
+                window.location.reload();
+            }, function(errMsg) {
+                _mm.errTips(errMsg)
+            })
+        })
     },
     // 加载用户信息
     loadUserInfo: function() {
-        // _user.checkLogin(function(res) {
-        //     $('.user.not-login').hide().siblings('.user.login').show().find('.username').text(res.username);
-        // }, function(errMsg) {
-        //     _mm.errTips(errMsg)
-        // })
+        _user.checkLogin(function(res) {
+            $('.user.not-login').hide().siblings('.user.login').show().find('.username').text(res.username);
+        }, function(errMsg) {
+            _mm.errTips(errMsg)
+        })
     },
     // 加载购物车数量
     loadCartCont: function() {

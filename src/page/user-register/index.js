@@ -1,6 +1,6 @@
 'use strict';
 
-require('./login.scss');
+require('./index.scss');
 require('page/common/nav-simple/index.js');
 require('node_modules/_font-awesome@4.7.0@font-awesome/css/font-awesome.min.css');
 var _mm = require('util/mm.js');
@@ -22,10 +22,24 @@ var page = {
     },
     bindEvent: function () {
         var _this = this;
+        // 验证username
+        $('#username').blur(function(){
+            var username = $.trim($(this).val());
+            // 如果用户名为空就不做验证
+            if (!username) {return};
+            console.log($(this).val())
+            // 异步验证用户名是否存在
+            _user.checkUsername(username, function(res) {
+                formError.hide()
+            }, function(errMsg) {
+                formError.show(errMsg)
+            })
+        })
+        // 注册按钮的点击
         $('#submit').click(function() {
             _this.submit();
         })
-        // 回车键提交 13代表回车键
+        // 回车键提交注册 13代表回车键
         $('.user-content').keyup(function(e) {
             if(e.keyCode === 13) {
                 _this.submit();
@@ -36,16 +50,21 @@ var page = {
     submit: function() {
         var fromData = {
             username: $.trim($('#username').val()),
-            password: $.trim($('#password').val())
+            password: $.trim($('#password').val()),
+            passwordConfirm: $.trim($('#passwordConfirm').val()),
+            phone: $.trim($('#phone').val()),
+            email: $.trim($('#email').val()),
+            question: $.trim($('#question').val()),
+            answer: $.trim($('#answer').val())
         };
         console.log(fromData)
         var validResult = this.formValidate(fromData);
         // 验证成功
         console.log(validResult)
         if(validResult.status) {
-            _user.userLogin(fromData, function(res){
+            _user.register(fromData, function(res){
                 console.log(res)
-                window.location.href = _mm.getUrlParam('redirect') || './index.html';
+                window.location.href = './result.html?type=register';
             }, function(errMsg) {
                 console.log(errMsg)
                 formError.show(errMsg)
@@ -67,6 +86,30 @@ var page = {
         }
         if(!_mm.validata(fromData.password, 'require')) {
             result.msg = '密码不能为空';
+            return result
+        }
+        if(fromData.password.length < 6) {
+            result.msg = '密码长度不能小于6位';
+            return result
+        }
+        if(fromData.password !== fromData.passwordConfirm) {
+            result.msg = '两次输入的密码不一致';
+            return result
+        }
+        if(!_mm.validata(fromData.phone, 'phone')) {
+            result.msg = '手机号格式不正确';
+            return result
+        }
+        if(!_mm.validata(fromData.email, 'email')) {
+            result.msg = '邮箱格式不正确';
+            return result
+        }
+        if(!_mm.validata(fromData.question, 'require')) {
+            result.msg = '密码提示问题不能为空';
+            return result
+        }
+        if(!_mm.validata(fromData.answer, 'require')) {
+            result.msg = '密码提示问题答案不能为空';
             return result
         }
         // 通过验证

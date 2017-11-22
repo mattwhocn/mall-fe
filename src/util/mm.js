@@ -27,7 +27,8 @@ var _mm = {
                 }
             },
             error: function (err) {
-                typeof param.error === 'function' && param.error(err.stautsText);
+                console.log(err.statusText)
+                typeof param.error === 'function' && param.error(err.statusText);
             }
         })
     },
@@ -58,7 +59,7 @@ var _mm = {
         alert(msg || '哪里不对了~');
     },
     // 字段的校验 支持是非空，手机，邮箱
-    validate: function (value, type) {
+    validata: function (value, type) {
         var value = $.trim(value);
         if (type === "require"){
             return !!value;

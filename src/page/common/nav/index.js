@@ -27,7 +27,7 @@ var nav = {
             _user.logout(function(res) {
                 window.location.reload();
             }, function(errMsg) {
-                _mm.errTips(errMsg)
+                _mm.errorTip(errMsg)
             })
         })
     },
@@ -36,16 +36,16 @@ var nav = {
         _user.checkLogin(function(res) {
             $('.user.not-login').hide().siblings('.user.login').show().find('.username').text(res.data.username);
         }, function(errMsg) {
-            _mm.errTips(errMsg)
+            // donothing
         })
     },
     // 加载购物车数量
     loadCartCont: function() {
-        // _cart.getCartCount(function(res) {
-        //     $('.nav .cart-count').text(res || 0);
-        // }, function(errMsg) {
-        //     $('.nav .cart-count').text(0);
-        // })
+        _cart.getCartCount(function(res) {
+            $('.nav .cart-count').text(res || 0);
+        }, function(errMsg) {
+            $('.nav .cart-count').text(0);
+        })
     }
 }
 module.exports = nav.init();    // 在输出模块的时候就先调用一下

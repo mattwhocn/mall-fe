@@ -19,7 +19,7 @@ var _mm = {
                 }
                 // 没有登录状态，需要登录
                 else if (res.status === 10) {
-                    this.doLigin();
+                    _this.doLogin();
                 }
                 // 接口成功，请求数据错误
                 else if (res.status === 1) {
